@@ -2,9 +2,10 @@ import { Client } from "./client";
 import { params } from "./params";
 
 export class Account {
-  private readonly _client: Client;
+  private readonly client: Client;
+  
   constructor(client: Client) {
-    this._client = client;
+    this.client = client;
   }
 
   async account() {
@@ -13,7 +14,7 @@ export class Account {
       Accept: "application/json",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     return await res.json();
   }
 
@@ -23,7 +24,7 @@ export class Account {
       Accept: "application/json",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     return await res.json();
   }
 
@@ -33,7 +34,7 @@ export class Account {
       Accept: "application/json",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     return await res.json();
   }
 
@@ -43,7 +44,7 @@ export class Account {
       Accept: "application/json",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     return await res.json();
   }
 
@@ -54,7 +55,7 @@ export class Account {
     };
     const options = params({ v: true });
 
-    const res = await this._client.post(path, headers, null, options);
+    const res = await this.client.post(path, headers, null, options);
     return await res.json();
   }
 
@@ -66,7 +67,7 @@ export class Account {
 
     const options = params({ v: false });
 
-    const res = await this._client.post(path, headers, null, options);
+    const res = await this.client.post(path, headers, null, options);
     return await res.json();
   }
 }

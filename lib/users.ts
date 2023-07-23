@@ -3,10 +3,10 @@ import { params } from "./params";
 import { NdjsonParser } from "./ndjson-parser";
 
 export class Users {
-  private _client: Client;
+  private readonly client: Client;
 
   constructor(client: Client) {
-    this._client = client;
+    this.client = client;
   }
 
   async activityByUsername(username: string) {
@@ -15,7 +15,7 @@ export class Users {
       Accept: "application/json",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     return await res.json();
   }
 
@@ -25,7 +25,7 @@ export class Users {
       Accept: "application/json",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     return await res.json();
   }
 
@@ -35,7 +35,7 @@ export class Users {
       Accept: "application/x-ndjson",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     const users = await res.text();
     return users === "" ? [] : NdjsonParser.parse(users);
   }
@@ -47,7 +47,7 @@ export class Users {
     };
     const usernameString = usernames.join(",");
 
-    const res = await this._client.post(path, headers, usernameString);
+    const res = await this.client.post(path, headers, usernameString);
     return await res.json();
   }
 
@@ -57,7 +57,7 @@ export class Users {
       Accept: "application/json",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     return await res.json();
   }
 
@@ -68,7 +68,7 @@ export class Users {
       Accept: "application/json",
     };
 
-    const res = await this._client.get(
+    const res = await this.client.get(
       path,
       headers,
       params({ ids: usernameString })

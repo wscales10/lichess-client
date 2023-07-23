@@ -2,10 +2,10 @@ import { Client } from "./client";
 import { NdjsonParser } from "./ndjson-parser";
 
 export class Relations {
-  private _client: Client;
+  private readonly client: Client;
 
   constructor(client: Client) {
-    this._client = client;
+    this.client = client;
   }
 
   async followers(username: string) {
@@ -14,7 +14,7 @@ export class Relations {
       Accept: "application/x-ndjson",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     const relations = await res.text();
     return relations === "" ? [] : NdjsonParser.parse(relations);
   }
@@ -25,7 +25,7 @@ export class Relations {
       Accept: "application/x-ndjson",
     };
 
-    const res = await this._client.get(path, headers);
+    const res = await this.client.get(path, headers);
     const relations = await res.text();
     return relations === "" ? [] : NdjsonParser.parse(relations);
   }

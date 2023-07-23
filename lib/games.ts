@@ -3,22 +3,23 @@ import { params } from "./params";
 import { NdjsonParser } from "./ndjson-parser";
 
 export class Games {
-  private _client: Client;
+  private readonly client: Client;
+  
   constructor(client: Client) {
-    this._client = client;
+    this.client = client;
   }
 
   current(maxGames?: number) {
     const path = "api/account/playing";
 
     const options = maxGames ? params({ nb: maxGames }) : undefined;
-    return this._client.get(path, {}, options);
+    return this.client.get(path, {}, options);
   }
 
   currentTv() {
     const path = "tv/channels";
 
-    return this._client.get(path);
+    return this.client.get(path);
   }
 
   async get(gameId: string, options = {}) {
@@ -28,7 +29,7 @@ export class Games {
       Accept: "application/json",
     };
 
-    const res = await this._client.get(path, headers, params(options));
+    const res = await this.client.get(path, headers, params(options));
     return await res.json();
   }
 
@@ -40,7 +41,7 @@ export class Games {
       Accept: "application/x-ndjson",
     };
 
-    const res = await this._client.post(
+    const res = await this.client.post(
       path,
       headers,
       idString,
@@ -57,7 +58,7 @@ export class Games {
       Accept: "application/x-ndjson",
     };
 
-    const res = await this._client.get(path, headers, params(options));
+    const res = await this.client.get(path, headers, params(options));
     const games = await res.text();
     return games === "" ? [] : NdjsonParser.parse(games);
   }

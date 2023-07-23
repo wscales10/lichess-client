@@ -1,11 +1,10 @@
 import fetch, { BodyInit, HeadersInit, RequestInit } from "node-fetch";
 
 export class Client {
-  baseUrl: string;
-  headers: HeadersInit;
-  token?: string;
+  private readonly baseUrl: string;
+  private readonly headers: HeadersInit;
+
   constructor(token?: string) {
-    this.token = token;
     this.headers = token ? { Authorization: `Bearer ${token}` } : {};
     this.baseUrl = "https://lichess.org";
   }
